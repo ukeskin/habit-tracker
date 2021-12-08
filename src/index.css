@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+	@apply bg-yellow-100;
+}
+
+.container{
+	@apply max-w-2xl mx-auto p-4;
+}
+
+.progress-bar{
+	@apply bg-yellow-100 h-6 rounded-full border-yellow-300 border-2;
+}
+
+.progress-bar-fill{
+	@apply bg-yellow-300 h-5 rounded-full transition-all duration-300;
+}
