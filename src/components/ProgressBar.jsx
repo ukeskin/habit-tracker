@@ -13,8 +13,12 @@ export default function ProgressBar({ current, goal }) {
               ? "progress-bar-fill progress-bar-fill-yellow"
               : "progress-bar-fill progress-bar-fill-green"
           }
-          style={{ width: `${percent}%` }}
-        />
+          style={{ width: `${percent}%`, position: "relative" }}
+        >
+          <span className="absolute -right-2 flex items-center justify-center p-1 h-6 w-6 bg-amber-100  rounded-full text-gray-800 text-sm  font-semibold">
+            {current}
+          </span>
+        </div>
       </div>
     </>
   );
