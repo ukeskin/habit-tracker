@@ -11,9 +11,12 @@ body{
 }
 
 .progress-bar{
-	@apply bg-yellow-100 h-6 rounded-full border-yellow-300 border-2;
+	@apply bg-yellow-100 h-6 rounded-full border-gray-500 border-2;
 }
+.progress-bar-fill{@apply bg-yellow-300 h-5 rounded-full transition-all duration-300;}
+.progress-bar-fill-red{@apply bg-red-600;}
+.progress-bar-fill-orange{@apply bg-yellow-500;}
+.progress-bar-fill-yellow{@apply bg-yellow-300;}
+.progress-bar-fill-green{@apply bg-green-400 animate-pulse;}
 
-.progress-bar-fill{
-	@apply bg-yellow-300 h-5 rounded-full transition-all duration-300;
-}
+.btn{@apply bg-yellow-200 text-gray-800 px-4 py-2 rounded-full text-sm font-semibold focus:bg-yellow-500;} 

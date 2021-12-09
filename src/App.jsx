@@ -1,24 +1,18 @@
 import React, { useState } from "react";
 import AddButton from "./components/AddButton";
 import Navbar from "./components/Navbar";
+import Modal from "./components/Modal";
+import ProgressBar from "./components/ProgressBar";
 import { habitData } from "./data";
-
-function ProgressBar({ current, goal }) {
-  const percent = (current / goal) * 100;
-  return (
-    <>
-      <div className="progress-bar">
-        <div className="progress-bar-fill" style={{ width: `${percent}%` }} />
-      </div>
-    </>
-  );
-}
 
 export default function App() {
   const [data, setData] = useState(habitData);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
-  // if currentCount < currentCount decrement habit current
-  // if currentCount > currentCount increment habit current
+  const handleAddButton = () => {
+    setIsOpenModal(!isOpenModal);
+  };
+
   const incrementHabit = (habit) => {
     if (habit.currentCount < habit.goalCount) {
       const newData = data.map((item) => {
@@ -44,20 +38,50 @@ export default function App() {
       setData(newData);
     }
   };
-  console.log(data.map((item) => item.currentCount));
   return (
     <div className="container">
       <Navbar />
-      <AddButton />
-      <div className="flex flex-col space-y-12">
+      <AddButton onClick={handleAddButton} />
+      {isOpenModal && (
+        <Modal>
+          <h3 className="font-bold block text-2xl mb-3">Form</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat
+            facere consequatur alias voluptatem corrupti cum aliquid
+          </p>
+          <div className="flex justify-end">
+            <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded ">
+              Add
+            </button>
+            <button
+              className="absolute -right-3 -top-3 bg-red-500 hover:bg-red-700 text-white font-bold p-3 rounded-full"
+              onClick={handleAddButton}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </Modal>
+      )}
+      <div className="flex flex-col space-y-8">
         {data.map((item) => (
           <div
             key={item.id}
             className="flex flex-col space-y-2 border-4 border-yellow-200 rounded-2xl p-6"
           >
-            <h2 className="text-xl text-gray-800">{item.name}</h2>
+            <h2 className="text-xl text-gray-800 mb-4">{item.name}</h2>
             <ProgressBar current={item.currentCount} goal={item.goalCount} />
-            <span className="flex text-xl justify-end text-gray-700">
+            <span className="flex text-lg justify-end text-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -74,17 +98,11 @@ export default function App() {
               </svg>
               <p>{item.goalCount} day</p>
             </span>
-            <div className="flex items-center">
-              <button
-                className="bg-yellow-200 text-gray-800 px-4 py-2"
-                onClick={() => decrementHabit(item)}
-              >
+            <div className="flex items-center justify-center space-x-2">
+              <button className="btn" onClick={() => decrementHabit(item)}>
                 -
               </button>
-              <button
-                className="bg-yellow-200 text-gray-800 px-4 py-2 border-l-4"
-                onClick={() => incrementHabit(item)}
-              >
+              <button className="btn" onClick={() => incrementHabit(item)}>
                 +
               </button>
             </div>
