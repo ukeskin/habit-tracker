@@ -4,7 +4,7 @@ export default function AddButton({ onClick }) {
   return (
     <div
       onClick={onClick}
-      className="fixed right-6 bottom-6 rounded-full w-16 h-16 border-4 border-white shadow-xl"
+      className="fixed right-6 bottom-6 rounded-full w-14 h-14 border-4 border-white shadow shadow-yellow-400"
     >
       <button>
         <svg

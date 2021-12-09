@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-	@apply bg-yellow-100;
+	@apply bg-amber-200;
 }
 
 .container{
@@ -19,4 +19,4 @@ body{
 .progress-bar-fill-yellow{@apply bg-yellow-300;}
 .progress-bar-fill-green{@apply bg-green-400 animate-pulse;}
 
-.btn{@apply bg-yellow-200 text-gray-800 px-4 py-2 rounded-full text-sm font-semibold focus:bg-yellow-500;} 
+.btn{@apply bg-yellow-200 text-gray-800 px-4 py-2 rounded-full text-sm font-bold;} 

@@ -1,13 +1,27 @@
-import React, { useState } from "react";
-import AddButton from "./components/AddButton";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
+
+import AddButton from "./components/AddButton";
 import Modal from "./components/Modal";
 import ProgressBar from "./components/ProgressBar";
-import { habitData } from "./data";
 
 export default function App() {
-  const [data, setData] = useState(habitData);
+  const [allHabits, setAllHabits] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [newGoalValue, setNewGoalValue] = useState("");
+  const [newHabitName, setNewHabitName] = useState("");
+
+  const getAllHabits = () => {
+    fetch("http://localhost:4000/habits")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllHabits(data);
+      });
+  };
+
+  useEffect(() => {
+    getAllHabits();
+  }, []);
 
   const handleAddButton = () => {
     setIsOpenModal(!isOpenModal);
@@ -15,27 +29,27 @@ export default function App() {
 
   const incrementHabit = (habit) => {
     if (habit.currentCount < habit.goalCount) {
-      const newData = data.map((item) => {
+      const newData = allHabits.map((item) => {
         if (item.id === habit.id) {
           return { ...item, currentCount: item.currentCount + 1 };
         } else {
           return item;
         }
       });
-      setData(newData);
+      setAllHabits(newData);
     }
   };
 
   const decrementHabit = (habit) => {
     if (habit.currentCount > 0) {
-      const newData = data.map((item) => {
+      const newData = allHabits.map((item) => {
         if (item.id === habit.id) {
           return { ...item, currentCount: item.currentCount - 1 };
         } else {
           return item;
         }
       });
-      setData(newData);
+      setAllHabits(newData);
     }
   };
   return (
@@ -44,13 +58,35 @@ export default function App() {
       <AddButton onClick={handleAddButton} />
       {isOpenModal && (
         <Modal>
-          <h3 className="font-bold block text-2xl mb-3">Form</h3>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat
-            facere consequatur alias voluptatem corrupti cum aliquid
-          </p>
+          <h3 className="font-bold block text-2xl mb-3">Add new habit</h3>
+          <form className="flex flex-col space-y-8">
+            <div>
+              <label className="block text-gray-700 font-bold mb-2">Name</label>
+              <input
+                className="appearance-none border rounded w-full p-4 text-gray-700 leading-tight"
+                type="text"
+                placeholder="Name"
+                onChange={(e) => {
+                  setNewHabitName(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700 font-bold mb-2">
+                Goal Value
+              </label>
+              <input
+                className="appearance-none border rounded w-full p-4 text-gray-700 leading-tight"
+                type="number"
+                placeholder="Goal Days"
+                onChange={(e) => {
+                  setNewGoalValue(e.target.value);
+                }}
+              />
+            </div>
+          </form>
           <div className="flex justify-end">
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded ">
+            <button className="bg-amber-400 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded ">
               Add
             </button>
             <button
@@ -59,14 +95,14 @@ export default function App() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                className="h-5 w-5"
                 viewBox="0 0 20 20"
-                fill="currentColor"
+                fillRule="currentColor"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
             </button>
@@ -74,10 +110,10 @@ export default function App() {
         </Modal>
       )}
       <div className="flex flex-col space-y-8">
-        {data.map((item) => (
+        {allHabits.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col space-y-2 border-4 border-yellow-200 rounded-2xl p-6"
+            className="flex flex-col space-y-2 bg-amber-100 rounded-2xl p-6 shadow-xl shadow-amber-400/50"
           >
             <h2 className="text-xl text-gray-800 mb-4">{item.name}</h2>
             <ProgressBar current={item.currentCount} goal={item.goalCount} />
