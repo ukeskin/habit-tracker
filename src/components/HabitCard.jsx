@@ -1,6 +1,6 @@
 import React from "react";
-
-export default function HabitCard({ item }) {
+import ProgressBar from "./ProgressBar";
+export default function HabitCard({ item, incrementHabit, decrementHabit }) {
   return (
     <div
       key={item.id}

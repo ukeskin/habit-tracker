@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 
 import AddButton from "./components/AddButton";
 import Modal from "./components/Modal";
-import ProgressBar from "./components/ProgressBar";
+import HabitCard from "./components/HabitCard";
 
 export default function App() {
   const [allHabits, setAllHabits] = useState([]);
@@ -63,7 +63,7 @@ export default function App() {
         {allHabits.map((item) => (
           <HabitCard
             key={item.id}
-            habit={item}
+            item={item}
             incrementHabit={incrementHabit}
             decrementHabit={decrementHabit}
           />
