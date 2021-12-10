@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-	@apply bg-amber-200;
+	@apply bg-amber-300;
 }
 
 .container{
@@ -18,5 +18,8 @@ body{
 .progress-bar-fill-orange{@apply bg-amber-500;}
 .progress-bar-fill-yellow{@apply bg-amber-300;}
 .progress-bar-fill-green{@apply bg-green-400;}
-
-.btn{@apply bg-yellow-200 text-gray-800 px-4 py-2 rounded-full text-sm font-bold;} 
+.habit-card{
+	@apply flex flex-col relative space-y-2 bg-amber-100 rounded-2xl p-6 shadow-xl shadow-amber-400/50;
+}
+.btn{@apply bg-yellow-200 text-gray-800 px-4 py-2 rounded-full text-sm font-bold hover:bg-yellow-100;} 
+.btn-green{@apply bg-amber-400 text-gray-800 px-2 py-1 rounded-full text-xs font-semibold hover:bg-amber-200 transition-all;}

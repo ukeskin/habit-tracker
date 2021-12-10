@@ -47,6 +47,16 @@ export default function App() {
     }
   };
 
+  const updateHabit = (habit) => {
+    fetch(`http://localhost:4000/habits/${habit.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(habit),
+    });
+  };
+
   return (
     <div className="container">
       <Navbar />
@@ -66,6 +76,7 @@ export default function App() {
             item={item}
             incrementHabit={incrementHabit}
             decrementHabit={decrementHabit}
+            updateHabit={updateHabit}
           />
         ))}
       </div>

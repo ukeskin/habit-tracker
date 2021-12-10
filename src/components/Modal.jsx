@@ -35,8 +35,8 @@ export default function Modal({
   };
 
   return (
-    <div className="fixed flex z-10 inset-0 overflow-y-auto container mx-auto">
-      <div className="relative flex flex-col justify-between bg-white rounded-xl shadow-2xl p-6 sm:w-10/12 w-full mx-auto shadow-amber-400">
+    <div className="fixed z-10 inset-0 flex items-center justify-center p-6 sm:p-12 w-full max-w-3xl mx-auto">
+      <div className="relative flex flex-col justify-between bg-white rounded-xl p-6 w-full shadow-xl shadow-amber-600/20">
         <h3 className="font-bold block text-2xl mb-3">Add new habit</h3>
         <form className="flex flex-col space-y-8">
           <div>
